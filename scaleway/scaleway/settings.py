@@ -11,10 +11,16 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
+
+#load env
+env = environ.Env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -123,3 +129,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# scaleway cred
+SCW_ACCESS_KEY = env("SCW_ACCESS_KEY")
+SCW_SECRET_KEY = env("SCW_SECRET_KEY")
+SCW_ORG_ID = env("SCW_DEFAULT_ORGANIZATION_ID")
+SCW_PROJECT_ID = env("SCW_DEFAULT_PROJECT_ID")
+SCW_BASE_URL = env("BASE_URL")
